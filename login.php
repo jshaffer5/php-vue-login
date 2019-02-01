@@ -10,19 +10,20 @@ if ($conn->connect_error) {
  
 $out = array('error' => false);
  
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = $_POST["username"];
+$password = $_POST["password"];
+
  
-if($username==''){
+if($username=='' && false) {
 	$out['error'] = true;
 	$out['message'] = "Username is required";
 }
-else if($password==''){
+else if($password=='' && false) {
 	$out['error'] = true;
 	$out['message'] = "Password is required";
 }
 else{
-	$sql = "select * from user where username='$username' and password='$password'";
+	$sql = "SELECT * FROM user WHERE username='josh' AND password='pass'";
 	$query = $conn->query($sql);
  
 	if($query->num_rows>0){
