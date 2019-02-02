@@ -14,11 +14,11 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 
  
-if($username=='' && false) {
+if($username=='') {
 	$out['error'] = true;
 	$out['message'] = "Username is required";
 }
-else if($password=='' && false) {
+else if($password=='') {
 	$out['error'] = true;
 	$out['message'] = "Password is required";
 }
