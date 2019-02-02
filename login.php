@@ -23,7 +23,7 @@ else if($password=='' && false) {
 	$out['message'] = "Password is required";
 }
 else{
-	$sql = "SELECT * FROM user WHERE username='josh' AND password='pass'";
+	$sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
 	$query = $conn->query($sql);
  
 	if($query->num_rows>0){

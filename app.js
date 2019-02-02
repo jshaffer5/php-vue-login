@@ -16,25 +16,39 @@ var app = new Vue({
 		checkLogin: function(){
 			var logForm = app.toFormData(app.logDetails);
 			console.log("logForm.username: ", logForm.getAll("username"));
-			axios.post('login.php', {username: "josh", password: "pass"})
-				.then(function(response){
-					console.log("server response: ", response);
-					console.log("logForm.username after axios.post(): ", logForm.getAll("username"));
-					if(response.error==true){
-						console.log('if called');
-						app.errorMessage = response.message;
-						console.log("failure! ...", response.message);
-					}
-					else{
-						console.log("else called");
-						app.successMessage = response.message;
-						app.logDetails = {username: '', password:''};
-						setTimeout(function(){
-							window.location.href="success.php";
-						},2000);
- 
-					}
-				});
+			
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				// Typical action to be performed when the document is ready:
+				// document.getElementById("demo").innerHTML = xhr.responseText;
+				console.log("responseText: ", this.responseText);
+				app.successMessage = this.responseText;
+				app.logDetails = { username: '', password: '' };
+				// setTimeout(function() {
+				// 	window.location.href = "success.php";
+				// }, 2000);
+				//window.location.href = "success.php";
+				}
+			};
+			xhr.open("POST", "login.php", true);
+			xhr.send(app.logDetails);
+
+				// console.log("server response: ", response);
+				// if(response.error==true){
+				// 	console.log('if called');
+				// 	app.errorMessage = response.message;
+				// 	console.log("failure! ...", response.message);
+				// }
+				// else{
+				// 	console.log("else called");
+				// 	app.successMessage = response.message;
+				// 	app.logDetails = {username: '', password:''};
+				// 	setTimeout(function(){
+				// 		window.location.href="success.php";
+				// 	},2000);
+
+				// }
 		},
  
 		toFormData: function(obj){
