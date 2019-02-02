@@ -43,6 +43,5 @@ session_start();
 	</div>
 </div>
 <script src="vue.js"></script>
-<script src="axios.min.js"></script>
 <script src="app.js"></script>
 </body>

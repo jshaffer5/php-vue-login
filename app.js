@@ -20,8 +20,10 @@ var app = new Vue({
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					console.log("responseText: ", this.responseText);
-					if(this.responseText.error==true){ // xhr failed, set the errorMessage
+					// var responseStr = xhr.responseText.toString().toLowerCase();
+					var responseJSON = JSON.parse(this.responseText);
+					console.log("responseText string: ", responseJSON);
+					if(responseJSON.error==true){ // xhr failed, set the errorMessage
 						app.errorMessage = this.responseText;
 					} else { // xhr successful, clear input areas, set successMessage, navigate to success.php 
 						app.successMessage = this.responseText;
@@ -31,31 +33,11 @@ var app = new Vue({
 						window.location.href = "success.php";
 						}, 3000);
 					}
-										
-					
 				}
 			};
 			xhr.open("POST", "login.php", true);
 			console.log("sending xhr with username: ", logForm.getAll("username"));
 			xhr.send(logForm);
-			
-			// window.location.href="success.php";
-
-				// console.log("server response: ", response);
-				// if(response.error==true){
-				// 	console.log('if called');
-				// 	app.errorMessage = response.message;
-				// 	console.log("failure! ...", response.message);
-				// }
-				// else{
-				// 	console.log("else called");
-				// 	app.successMessage = response.message;
-				// 	app.logDetails = {username: '', password:''};
-				// 	setTimeout(function(){
-				// 		window.location.href="success.php";
-				// 	},2000);
-
-				// }
 		},
  
 		toFormData: function(obj){
