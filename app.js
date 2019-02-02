@@ -3,7 +3,7 @@ var app = new Vue({
 	data:{
 		successMessage: "",
 		errorMessage: "",
-		logDetails: {username: 'josh', password: 'pass'},
+		logDetails: {username: '', password: ''},
 	},
  
 	methods:{
@@ -21,12 +21,18 @@ var app = new Vue({
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("responseText: ", this.responseText);
-					app.successMessage = this.responseText;
-					app.logDetails = { username: '', password: '' };
-					// Wait 3 seconds while displaying response info, then open success.php
-					setTimeout(function() {
+					if(this.responseText.error==true){ // xhr failed, set the errorMessage
+						app.errorMessage = this.responseText;
+					} else { // xhr successful, clear input areas, set successMessage, navigate to success.php 
+						app.successMessage = this.responseText;
+						app.logDetails = { username: '', password: '' };
+						// Wait 3 seconds while displaying error/success message, then open success.php
+						setTimeout(function() {
 						window.location.href = "success.php";
-					}, 3000);
+						}, 3000);
+					}
+										
+					
 				}
 			};
 			xhr.open("POST", "login.php", true);
