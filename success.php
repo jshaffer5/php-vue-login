@@ -13,6 +13,7 @@
 	$sql="select * from user where userid='".$_SESSION['user']."'";
 	$query=$conn->query($sql);
 	$row=$query->fetch_array();
+	$conn->close();
  
 ?>
 <!DOCTYPE html>

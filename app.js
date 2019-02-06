@@ -24,14 +24,14 @@ var app = new Vue({
 					var responseJSON = JSON.parse(this.responseText);
 					console.log("responseText string: ", responseJSON);
 					if(responseJSON.error==true){ // xhr failed, set the errorMessage
-						app.errorMessage = this.responseText;
+						app.errorMessage = responseJSON.message;
 					} else { // xhr successful, clear input areas, set successMessage, navigate to success.php 
-						app.successMessage = this.responseText;
+						app.successMessage = responseJSON.message;
 						app.logDetails = { username: '', password: '' };
 						// Wait 3 seconds while displaying error/success message, then open success.php
-						setTimeout(function() {
-						window.location.href = "success.php";
-						}, 3000);
+						// setTimeout(function() {
+						// window.location.href = "success.php";
+						// }, 3000);
 					}
 				}
 			};
