@@ -22,7 +22,7 @@ var app = new Vue({
 				if (this.readyState == 4 && this.status == 200) {
 					// var responseStr = xhr.responseText.toString().toLowerCase();
 					var responseJSON = JSON.parse(this.responseText);
-					console.log("responseText string: ", responseJSON);
+					console.log("responseJSON: ", responseJSON);
 					if(responseJSON.error==true){ // xhr failed, set the errorMessage
 						app.errorMessage = responseJSON.message;
 					} else { // xhr successful, clear input areas, set successMessage, navigate to success.php 
