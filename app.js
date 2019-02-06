@@ -15,7 +15,6 @@ var app = new Vue({
  
 		checkLogin: function(){
 			var logForm = app.toFormData(app.logDetails);
-			console.log("logForm.username: ", logForm.getAll("username"));
 			
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
@@ -29,14 +28,13 @@ var app = new Vue({
 						app.successMessage = responseJSON.message;
 						app.logDetails = { username: '', password: '' };
 						// Wait 3 seconds while displaying error/success message, then open success.php
-						// setTimeout(function() {
-						// window.location.href = "success.php";
-						// }, 3000);
+						setTimeout(function() {
+						window.location.href = "success.php";
+						}, 3000);
 					}
 				}
 			};
 			xhr.open("POST", "login.php", true);
-			console.log("sending xhr with username: ", logForm.getAll("username"));
 			xhr.send(logForm);
 		},
  
@@ -49,7 +47,6 @@ var app = new Vue({
 			}
 			// form_data.set("username", obj.username);
 			// form_data.set("password", obj.password);
-			console.log("form_data: ", form_data.getAll("password"));
 			return form_data;
 		},
  
