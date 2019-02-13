@@ -28,7 +28,7 @@ var app = new Vue({
 						app.logDetails = { username: '', password: '' };
 						// Wait 3 seconds while displaying error/success message, then open success.php
 						setTimeout(function() {
-						window.location.href = "success.php";
+						window.location.href = "list.php";
 						}, 3000);
 					}
 				}
