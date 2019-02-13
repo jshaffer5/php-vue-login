@@ -19,12 +19,11 @@ var app = new Vue({
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					// var responseStr = xhr.responseText.toString().toLowerCase();
 					var responseJSON = JSON.parse(this.responseText);
 					console.log("responseJSON: ", responseJSON);
 					if(responseJSON.error==true){ // xhr failed, set the errorMessage
 						app.errorMessage = responseJSON.message;
-					} else { // xhr successful, clear input areas, set successMessage, navigate to success.php 
+					} else { // xhr successful. clear input areas, set successMessage, navigate to success.php 
 						app.successMessage = responseJSON.message;
 						app.logDetails = { username: '', password: '' };
 						// Wait 3 seconds while displaying error/success message, then open success.php
@@ -43,10 +42,8 @@ var app = new Vue({
 			console.log("toFormData() parameter 'obj' contains: ", obj);
 			var form_data = new FormData();
 			for(var key in obj){
-				form_data.append(key, obj[key]);
+				form_data.set(key, obj[key]);
 			}
-			// form_data.set("username", obj.username);
-			// form_data.set("password", obj.password);
 			return form_data;
 		},
  
