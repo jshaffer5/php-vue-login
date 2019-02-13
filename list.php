@@ -14,20 +14,20 @@ session_start();
 <div class="container">
 	<h1 class="page-header text-center">Vue.js Todo List</h1>
 	
-    <div id="list">
+    <div id="list" style="text-align:center;">
         <br><br>
         <h2>
             Todo List
         </h2>
-        <input placeholder="new list item" v-model="newItem">
+        <input placeholder="new list item" v-model="newItem" v-on:keyup="keymonitor">
         <button v-on:click="addItem">
             Add
         </button>
-        <ol>
+        <ul style="list-style:none">
             <li v-for="todo in todos">
             {{ todo.text }}
             </li>
-        </ol>
+        </ul>
         <br>
     </div>
 
@@ -42,6 +42,7 @@ session_start();
 
 
 </div>
+<script src="vue.js"></script>
 <script src="list.js"></script>
 </body>
 </html>

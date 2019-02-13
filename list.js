@@ -13,6 +13,12 @@ var list = new Vue({
           console.log(this.newItem);
         this.todos.push({text: this.newItem});
         this.newItem = '';
-      }
+        },
+
+        keymonitor: function(event) {
+            if(event.key == "Enter"){
+                list.addItem();
+            }
+        },
     }
   })
