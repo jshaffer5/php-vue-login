@@ -10,9 +10,12 @@ var list = new Vue({
     },
     methods: {
         addItem: function() {
-          console.log(this.newItem);
-        this.todos.push({text: this.newItem});
-        this.newItem = '';
+            // Check first for empty or blankspace only strings
+            if(this.newItem=='' || /^\s*$/.test(this.newItem)) { 
+                return;
+            }
+            this.todos.push({text: this.newItem});
+            this.newItem = '';
         },
 
         keymonitor: function(event) {

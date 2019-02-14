@@ -14,21 +14,30 @@ session_start();
 <body>
 <div class="container">
 	<h1 class="page-header">Vue.js Todo List</h1>
-	
-    <div id="list" class="todo-list">
-        <h2>
-            Todos
-        </h2>
-        <input placeholder="new list item" v-model="newItem" v-on:keyup="keymonitor"><br>
-        <button id="add" class="btn btn-success" v-on:click="addItem">
-            Add
-        </button><hr>
-        <ul id="list-items"> 
-            <li v-for="todo in todos">
-            {{ todo.text }}
-            </li>
-        </ul>
-        <br>
+    
+    <div id="list-flex">
+        <div id="list" class="todo-list">
+            <h2>
+                Todos
+            </h2>
+            <input id="input-item" class="form-control" placeholder="new list item" v-model="newItem" v-on:keyup="keymonitor"><br>
+            <button id="add" class="btn btn-success" v-on:click="addItem">
+                Add
+            </button><hr>
+            <ul id="list-items"> 
+                <li class="ui-state-default" v-for="todo in todos">
+                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="" />{{ todo.text }}
+                                </label>
+                            </div>
+                </li>
+            </ul>
+            <div class="todo-footer">
+                <strong><span class="count-todos"></span></strong> 3 Items Left
+            </div>
+            <br>
+        </div>
     </div>
 
     <a href="logout.php" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
