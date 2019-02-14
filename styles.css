@@ -1,0 +1,42 @@
+body{
+    background-color:#EEEEEE;
+}
+
+.container {
+    text-align: center;
+}
+
+.todo-list{
+    background-color:#FFF;
+    margin-top:5px;
+    display: inline-block;
+}
+
+button#add{
+    /* margin-top:10px;
+    margin-left: 10px; */
+    /* margin: 10px 0; */
+    /* margin-right: auto; */
+    /* margin-left: 10px; */
+    /* text-align: left; */
+    /* left: 0; */
+    /* float: left; */
+    margin: 10px auto 0 0;
+    text-align: left;
+}
+
+.btn {
+    text-align: left;
+    display: block;
+}
+
+.todo-list hr {
+    margin: 10px 10px;
+}
+
+ul#list-items{
+    text-align: left;
+    /* margin-left: 10px; */
+    padding-right: 20px;
+    list-style: none;
+}
