@@ -2,11 +2,18 @@ var list = new Vue({
     el: '#list',
     data: {
       todos: [
-        { text: 'Learn JavaScript' },
-        { text: 'Learn Vue' },
-        { text: 'Build something awesome' }
+        { text: 'Learn JavaScript', id: 0 },
+        { text: 'Learn Vue', id: 1 },
+        // { text: 'Build something awesome' }
       ],
+      checkedItems: [],
+      selected: [true, true, true],
       newItem: ''
+    },
+    computed: {
+        itemsLeft: function() {
+            return this.todos.length - this.checkedItems.length;
+        }
     },
     methods: {
         addItem: function() {
@@ -14,7 +21,7 @@ var list = new Vue({
             if(this.newItem=='' || /^\s*$/.test(this.newItem)) { 
                 return;
             }
-            this.todos.push({text: this.newItem});
+            this.todos.push({text: this.newItem, id: this.todos.length});
             this.newItem = '';
         },
 
@@ -23,5 +30,9 @@ var list = new Vue({
                 list.addItem();
             }
         },
+
+        checkboxClicked: function() {
+
+        }
     }
   })

@@ -27,14 +27,14 @@ session_start();
             <ul id="list-items"> 
                 <li class="ui-state-default" v-for="todo in todos">
                 <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="" />{{ todo.text }}
-                                </label>
+                                <input type="checkbox" id="checkbox" :value ="todo.text" :key="todo.id" v-on:click="checkboxClicked" v-model="checkedItems">
+                                <label id="label-list-item" for="checkbox">{{todo.text}}</label>
                             </div>
                 </li>
             </ul>
+            <span>Completed Tasks: <a v-for="item in checkedItems">{{ item }}, </a></span>
             <div class="todo-footer">
-                <strong><span class="count-todos"></span></strong> 3 Items Left
+                <strong><span class="count-todos"></span></strong> {{ itemsLeft }} Items Left
             </div>
             <br>
         </div>

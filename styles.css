@@ -53,6 +53,10 @@ li.ui-state-default:last-child{
     /* border-bottom:none; */
 }
 
+#label-list-item {
+    text-decoration: line-through;
+}
+
 .todo-footer{
     /* background-color:#F4FCE8; */
     margin:0 -20px -10px -20px;
