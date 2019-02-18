@@ -21,20 +21,20 @@ session_start();
                 Todos
             </h2>
             <input id="input-item" class="form-control" placeholder="new list item" v-model="newItem" v-on:keyup="keymonitor"><br>
-            <button id="add" class="btn btn-success" v-on:click="addItem">
+            <button id="add" class="btn btn-success" @click="addItem">
                 Add
             </button><hr>
             <ul id="list-items"> 
                 <li class="ui-state-default" v-for="todo in todos">
                 <div class="checkbox">
                                 <input type="checkbox" class="list-checkbox" 
-                                        :id="todo.id" :value ="todo.text" :key="todo.id" v-on:click="checkboxClicked(todo.id)" v-model="checkedItems">
+                                        :id="todo.id" :value ="todo.text" :key="todo.id" @click="checkboxClicked(todo.id)" v-model="checkedItems">
                                 <label id="label-list-item" for="checkbox" :class="{ 'item-is-checked': todo.isChecked }">{{todo.text}}
                                 </label>
                             </div>
                 </li>
             </ul>
-            <span>Completed Tasks: <a v-for="item in checkedItems" v-on:click="recoverItem">{{ item }}, </a></span>
+            <span>Completed Tasks: <a v-for="item in checkedItems" @click="recoverItem">{{ item }}, </a></span>
             <div class="todo-footer">
                 <strong><span class="count-todos"></span></strong> {{ itemsLeft }} Items Left
             </div>
