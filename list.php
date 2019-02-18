@@ -7,13 +7,13 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My List</title>
+	<title>Todo List</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="container">
-	<h1 class="page-header">Vue.js Todo List</h1>
+	<h1 class="page-header">Josh's Vue.js Todo List</h1>
     
     <div id="list-flex">
         <div id="list" class="todo-list">
