@@ -54,6 +54,10 @@ li.ui-state-default:last-child{
 }
 
 #label-list-item {
+    /* text-decoration: line-through; */
+}
+
+.item-is-checked{
     text-decoration: line-through;
 }
 
