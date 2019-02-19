@@ -25,7 +25,7 @@ var list = new Vue({
             }
             this.todos.push({text: this.newItem, id: this.todos.length, isChecked: false });
             // Update the list database and clear newItem
-            insertItemRequest(this.newItem);
+            this.insertItemRequest(this.newItem);
             this.newItem = '';
         },
 
@@ -47,15 +47,17 @@ var list = new Vue({
            console.log("isChecked: ", this.todos[id].isChecked);
         },
 
-        insertItemRequest(item) {
+        insertItemRequest: function(item) {
             let todo = { todoText: item };
             // Create FormData object
-            let formData = toFormData(todo);
+            let formData = this.toFormData(todo);
             // Create http request
-            let xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "insert.php", true);
             xhr.onreadystatechange = function() {
                 if (this.readyState==4 && this.status==200){
-                    let responseJSON = JS0N.parse(this.responseText);
+                    console.log("response text: ", this.responseText);
+                    let responseJSON = JS0N.parse("{'test': 'a test value'}");
                     console.log("responseJSON: ", responseJSON);
                     if (responseJSON.error==true) {
                         list.errorMessage = responseJSON.message;
@@ -64,8 +66,8 @@ var list = new Vue({
                         list.successMessage = responseJSON.message;
                     }
                 }
-            }
-            xhr.open("POST", "insert.php", true);
+            };
+            
             xhr.send(formData);
         },
 
