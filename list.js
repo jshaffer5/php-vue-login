@@ -56,7 +56,7 @@ var list = new Vue({
             xhr.onreadystatechange = function() {
                 if (this.readyState==4 && this.status==200){
                     console.log("response text: ", this.responseText);
-                    let responseJSON = JS0N.parse("{'test': 'a test value'}");
+                    let responseJSON = JSON.parse(this.responseText);
                     console.log("responseJSON: ", responseJSON);
                     if (responseJSON.error==true) {
                         list.errorMessage = responseJSON.message;
