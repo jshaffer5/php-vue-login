@@ -8,7 +8,9 @@ var list = new Vue({
       ],
       checkedItems: [],
       selected: [],
-      newItem: ''
+      newItem: '',
+      successMessage: "",
+	  errorMessage: ""
     },
     computed: {
         itemsLeft: function() {
@@ -22,6 +24,8 @@ var list = new Vue({
                 return;
             }
             this.todos.push({text: this.newItem, id: this.todos.length, isChecked: false });
+            // Update the list database and clear newItem
+            insertItemRequest(this.newItem);
             this.newItem = '';
         },
 
@@ -36,14 +40,43 @@ var list = new Vue({
         },
 
         checkboxClicked: function(id) {
-            console.log(id);
-            let el = document.getElementById(id);
-            el.style.textDecoration = "none";
             this.toggleChecked(id);
         },
         toggleChecked: function(id) {
            this.todos[id].isChecked = !this.todos[id].isChecked; 
            console.log("isChecked: ", this.todos[id].isChecked);
-        }
+        },
+
+        insertItemRequest(item) {
+            let todo = { todoText: item };
+            // Create FormData object
+            let formData = toFormData(todo);
+            // Create http request
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState==4 && this.status==200){
+                    let responseJSON = JS0N.parse(this.responseText);
+                    console.log("responseJSON: ", responseJSON);
+                    if (responseJSON.error==true) {
+                        list.errorMessage = responseJSON.message;
+                        console.log("errorMessage: ", list.errorMessage);
+                    } else { // XHR successful. Output success message below todolist 
+                        list.successMessage = responseJSON.message;
+                    }
+                }
+            }
+            xhr.open("POST", "insert.php", true);
+            xhr.send(formData);
+        },
+
+        toFormData: function(obj){
+			console.log("toFormData() called");
+			console.log("toFormData() parameter 'obj' contains: ", obj);
+			var form_data = new FormData();
+			for(var key in obj){
+				form_data.set(key, obj[key]);
+			}
+			return form_data;
+		},
     }
   })
