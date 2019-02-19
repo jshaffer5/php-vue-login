@@ -42,7 +42,7 @@ var app = new Vue({
 			console.log("toFormData() parameter 'obj' contains: ", obj);
 			var form_data = new FormData();
 			for(var key in obj){
-				form_data.set(key, obj[key]);
+				form_data.append(key, obj[key]);
 			}
 			return form_data;
 		},

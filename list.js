@@ -50,10 +50,9 @@ var list = new Vue({
         insertItemRequest: function(item) {
             let todo = { todoText: item };
             // Create FormData object
-            let formData = this.toFormData(todo);
+            var formData = list.toFormData(todo);
             // Create http request
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "insert.php", true);
             xhr.onreadystatechange = function() {
                 if (this.readyState==4 && this.status==200){
                     console.log("response text: ", this.responseText);
@@ -67,7 +66,7 @@ var list = new Vue({
                     }
                 }
             };
-            
+            xhr.open("POST", "insert.php", true);
             xhr.send(formData);
         },
 
@@ -76,7 +75,7 @@ var list = new Vue({
 			console.log("toFormData() parameter 'obj' contains: ", obj);
 			var form_data = new FormData();
 			for(var key in obj){
-				form_data.set(key, obj[key]);
+				form_data.append(key, obj[key]);
 			}
 			return form_data;
 		},
