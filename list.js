@@ -1,11 +1,17 @@
-var list = new Vue({
-    el: '#list',
-    data: {
-      todos: [
+const readItemsRequest = function() {
+    let mockData = [
         { text: 'Learn JavaScript', id: 0, isChecked: false },
         { text: 'Learn Vue', id: 1 , isChecked: false },
         // { text: 'Build something awesome' }
-      ],
+      ];
+    console.log("mockData: ", mockData);
+    return mockData;
+}
+
+var list = new Vue({
+    el: '#list',
+    data: {
+      todos: readItemsRequest(),
       checkedItems: [],
       selected: [],
       newItem: '',
@@ -17,6 +23,9 @@ var list = new Vue({
             return this.todos.length - this.checkedItems.length;
         }
     },
+    mount: function() {
+        this.todos = this.readItemsRequest();
+    },
     methods: {
         addItem: function() {
             // Check first for empty or blankspace only strings
@@ -25,7 +34,7 @@ var list = new Vue({
             }
             this.todos.push({text: this.newItem, id: this.todos.length, isChecked: false });
             // Update the list database and clear newItem
-            this.insertItemRequest(this.newItem);
+            this.updateItemRequest(this.newItem, "insert");
             this.newItem = '';
         },
 
@@ -41,14 +50,21 @@ var list = new Vue({
 
         checkboxClicked: function(id) {
             this.toggleChecked(id);
+            if (this.todos[id].isChecked == false) {// Item unchecked, reinsert into list
+                this.updateItemRequest( this.todos[id].text, "insert" );
+            } else {
+                this.updateItemRequest( this.todos[id].text, "delete" );
+            }
+            let todo = this.todos[id].todoText;
+            console.log("deleting: ", this.todos[id].text);
         },
         toggleChecked: function(id) {
            this.todos[id].isChecked = !this.todos[id].isChecked; 
            console.log("isChecked: ", this.todos[id].isChecked);
         },
 
-        insertItemRequest: function(item) {
-            let todo = { todoText: item };
+        updateItemRequest: function(item, action) {
+            let todo = { todoText: item, action: action};
             // Create FormData object
             var formData = list.toFormData(todo);
             // Create http request
@@ -81,3 +97,5 @@ var list = new Vue({
 		},
     }
   })
+
+  
