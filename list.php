@@ -1,8 +1,10 @@
 <?php
 session_start();
-	if(!isset($_SESSION['user'])){
-		// header('location:index.php');
-	}
+	if(!isset($_SESSION['user'])||(trim ($_SESSION['user']) == '')){
+        header('location:index.php');
+        
+    }
+    echo "<a>{$_SESSION['user']}</a>";
 ?>
 <!DOCTYPE html>
 <html>

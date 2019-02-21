@@ -1,37 +1,9 @@
-const readItemsRequest = function() {
-    let mockData = [
-        { text: 'Learn JavaScript', id: 0, isChecked: false },
-        { text: 'Learn Vue', id: 1 , isChecked: false },
-        // { text: 'Build something awesome' }
-    ];
-
-    let listDataJSON = null;
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState==4 && this.status==200) {
-            console.log("responseText :", this.responseText);
-            listDataJSON = JSON.parse(this.responseText);
-            console.log("listDataJSON in xhr: ", listDataJSON);
-            return listDataJSON;
-        }
-    };
-    xhr.open("GET", "read.php");
-    xhr.send();
-
-    console.log("listDataJSON return: ", listDataJSON);
-    console.log(mockData)
-    
-}
-
 var list = new Vue({
     el: '#list',
     data: {
         todos: [],
         checkedItems: [],
-        selected: [],
         newItem: '',
-        successMessage: "",
-        errorMessage: ""
     },
     computed: {
         itemsLeft: function() {
@@ -49,6 +21,7 @@ var list = new Vue({
                 listDataJSON = JSON.parse(this.responseText);
                 console.log("listDataJSON in xhr: ", listDataJSON);
                 listArray = listDataJSON;
+                // Convert the strings array into valid todos objects and add to todos array 
                 listArray.map((val, index) => {
                     list.todos.push({text: val, id: index, isChecked: false});
                 });
@@ -56,8 +29,6 @@ var list = new Vue({
         };
         xhr.open("GET", "read.php");
         xhr.send();
-        // Convert the strings array into valid todos object
-        
     },
     methods: {
         addItem: function() {
