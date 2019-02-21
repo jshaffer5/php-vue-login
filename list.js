@@ -3,28 +3,61 @@ const readItemsRequest = function() {
         { text: 'Learn JavaScript', id: 0, isChecked: false },
         { text: 'Learn Vue', id: 1 , isChecked: false },
         // { text: 'Build something awesome' }
-      ];
-    console.log("mockData: ", mockData);
-    return mockData;
+    ];
+
+    let listDataJSON = null;
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState==4 && this.status==200) {
+            console.log("responseText :", this.responseText);
+            listDataJSON = JSON.parse(this.responseText);
+            console.log("listDataJSON in xhr: ", listDataJSON);
+            return listDataJSON;
+        }
+    };
+    xhr.open("GET", "read.php");
+    xhr.send();
+
+    console.log("listDataJSON return: ", listDataJSON);
+    console.log(mockData)
+    
 }
 
 var list = new Vue({
     el: '#list',
     data: {
-      todos: readItemsRequest(),
-      checkedItems: [],
-      selected: [],
-      newItem: '',
-      successMessage: "",
-	  errorMessage: ""
+        todos: [],
+        checkedItems: [],
+        selected: [],
+        newItem: '',
+        successMessage: "",
+        errorMessage: ""
     },
     computed: {
         itemsLeft: function() {
             return this.todos.length - this.checkedItems.length;
         }
     },
-    mount: function() {
-        this.todos = this.readItemsRequest();
+    mounted: function() {
+        // Get the list text as array of strings from XMLHttpRequest()
+        let listDataJSON = null;
+        let listArray = null;
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState==4 && this.status==200) {
+                console.log("responseText :", this.responseText);
+                listDataJSON = JSON.parse(this.responseText);
+                console.log("listDataJSON in xhr: ", listDataJSON);
+                listArray = listDataJSON;
+                listArray.map((val, index) => {
+                    list.todos.push({text: val, id: index, isChecked: false});
+                });
+            }
+        };
+        xhr.open("GET", "read.php");
+        xhr.send();
+        // Convert the strings array into valid todos object
+        
     },
     methods: {
         addItem: function() {
