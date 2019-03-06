@@ -12,8 +12,9 @@ $conn = new mysqli("localhost", "root", "root", "vue_todolist");
 }
 
 if ($conn->connect_error) {
-    die("read.php: 15 -> Connection failed: " . $conn->connect_error);
+    die("read.php: 15 -> Connection failed: " . $conn->connect_error . "$conn: " . trim($conn));
 }
+
 $sql = "SELECT * FROM todos";
 $query = $conn->query($sql);
 $list = array();
