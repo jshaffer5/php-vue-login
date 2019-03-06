@@ -8,12 +8,12 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 $conn = new mysqli($server, $username, $password, $db);
 
-if (!isset($conn)||(trim ($conn) == '')){
+if (empty($url["host"])){
 $conn = new mysqli("localhost", "root", "root", "vue_todolist");
 }
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die( "insert.php: 16 -> Connection failed: " . $conn->connect_error . "url empty?: " . empty($url["host"]));
 }
 
 $out = array('error' => false);
