@@ -1,0 +1,12 @@
+{
+    "name": "js/php-vue-login",
+    "description": "vue todolist w/ php MYSQL login and data persistence",
+    "type": "project",
+    "authors": [
+        {
+            "name": "js",
+            "email": "joshtwoone@gmail.com"
+        }
+    ],
+    "require": {}
+}
