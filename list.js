@@ -1,4 +1,4 @@
-var list = new Vue({
+var list = new Vue({ //TEST*********
     el: '#list',
     data: {
         todos: [],
