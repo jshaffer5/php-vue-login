@@ -50,10 +50,10 @@ var app = new Vue({
 				  },
 				  body: JSON.stringify(data) // body data type must match "Content-Type" header
 				})
-				.then(response => JSON.parse(response))
+				.then(response => JSON.parse(response.body))
 				.then(
 					function(data) {
-						if (response.status !== 200) {
+						if (response.ok) {
 						console.log('There was a problem. Status Code: ' + response.status);
 						return;
 						}
