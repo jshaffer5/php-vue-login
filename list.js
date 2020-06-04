@@ -108,20 +108,26 @@ var list = new Vue({
                 })
                 .catch(err => console.log('Network Error: ', err));
             }
-            const result = sendUpdate('insert.php');
-            result.then(data => {
-                    console.log("Data Received: ", data);
-                    if (data.error==true) {
-                        list.errorMessage = data.message;
-                        console.log("errorMessage: ", list.errorMessage);
-                    } else { // Successful. Output success message below todolist 
-                        list.successMessage = data.message;
-                    }
-            });
+            // const result = sendUpdate('insert.php');
+            // result.then(data => {
+            //         console.log("Data Received: ", data);
+            //         if (data.error==true) {
+            //             list.errorMessage = data.message;
+            //             console.log("errorMessage: ", list.errorMessage);
+            //         } else { // Successful. Output success message below todolist 
+            //             list.successMessage = data.message;
+            //         }
+            // });
             (async () => {
-                const result = await sendUpdate();
-                console.log(result);
-              })()
+                const data = await sendUpdate('insert.php');
+                console.log("Data Received: ", data);
+                if (data.error==true) {
+                    list.errorMessage = data.message;
+                    console.log("errorMessage: ", list.errorMessage);
+                } else { // Successful. Output success message below todolist 
+                    list.successMessage = data.message;
+                }
+            })()
         },
 
         toFormData: function(obj){

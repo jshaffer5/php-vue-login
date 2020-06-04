@@ -26,6 +26,7 @@ $out["action"]=$action;
 if ($action=="delete") {
     $sql = "DELETE FROM todos WHERE todoText='$todo_text'";
 } else {
+    $out["action"]="insert"
     $sql = "INSERT INTO todos (todoText) VALUES ('$todo_text')";
 }
 
