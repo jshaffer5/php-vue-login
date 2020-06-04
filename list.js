@@ -97,6 +97,9 @@ var list = new Vue({
             function sendUpdate(url = '', data = formData) {
                 fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {
+					'Content-Type': 'multipart/form-data'
+				  },
                 body: data// body data type must match "Content-Type" header
                 })
                 .then(response => {
