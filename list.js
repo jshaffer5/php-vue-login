@@ -94,8 +94,8 @@ var list = new Vue({
             // Create FormData object
             var formData = list.toFormData(todo);
             // Create http request
-            async function sendUpdate(url = '', data = formData) {
-                await fetch(url, {
+            function sendUpdate(url = '', data = formData) {
+                fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 body: data// body data type must match "Content-Type" header
                 })
