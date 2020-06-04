@@ -104,7 +104,15 @@ var list = new Vue({
                         console.log('Request Error. Status Code: ' + response.status);
                         return;
                         }
-                    return response.json();
+                    const data = response.json();
+                    
+                        console.log("Data Received: ", data);
+                    if (data.error==true) {
+                        list.errorMessage = data.message;
+                        console.log("errorMessage: ", list.errorMessage);
+                    } else { // Successful. Output success message below todolist 
+                        list.successMessage = data.message;
+                    }
                 })
                 .catch(err => console.log('Network Error: ', err));
             }
