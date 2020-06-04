@@ -118,6 +118,10 @@ var list = new Vue({
                         list.successMessage = data.message;
                     }
             });
+            (async () => {
+                const result = await sendUpdate();
+                console.log(result);
+              })()
         },
 
         toFormData: function(obj){
