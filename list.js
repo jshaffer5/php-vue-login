@@ -102,7 +102,7 @@ var list = new Vue({
                 },
                 body: JSON.stringify(data) // body data type must match "Content-Type" header
                 })
-                .then(response => JSON.parse(response.body))
+                .then(response => response.json())
                 .then(data => {
                     if (response.ok){
                         console.log("Data Received: ", data);
