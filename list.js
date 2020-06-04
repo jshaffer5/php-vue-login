@@ -104,9 +104,10 @@ var list = new Vue({
                         console.log('Request Error. Status Code: ' + response.status);
                         return;
                         }
-                    const data = response.json();
-                    
-                        console.log("Data Received: ", data);
+                    return response.json();
+                })
+                .then( data => {
+                    console.log("Data Received: ", data);
                     if (data.error==true) {
                         list.errorMessage = data.message;
                         console.log("errorMessage: ", list.errorMessage);
