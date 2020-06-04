@@ -42,7 +42,7 @@ var app = new Vue({
 			const logForm = app.toFormData(app.logDetails);
 
 			// Example POST method implementation:
-			async function sendLogin(url = 'login.php', data = logForm) {
+			async function sendLogin(url = '', data = {}) {
 				await fetch(url, {
 				  method: 'POST', // *GET, POST, PUT, DELETE, etc.
 				  headers: {
@@ -76,6 +76,7 @@ var app = new Vue({
 					console.log('Fetch Error : ', err);
 				});
 			}
+			sendLogin('login.php', logForm);
 			// end Fetch
 		},
  
