@@ -111,7 +111,8 @@ var list = new Vue({
                     if (data.error==true) {
                         list.errorMessage = data.message;
                         console.log("errorMessage: ", list.errorMessage);
-                    } else { // Successful. Output success message below todolist 
+                    } else { // Successful. Output success message below todolist
+                        console.log('data : ', data); 
                         list.successMessage = data.message;
                     }
                 })
