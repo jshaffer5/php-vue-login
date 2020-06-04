@@ -101,21 +101,24 @@ var list = new Vue({
                 })
                 .then(response => {
                     if (!response.ok) {
-                        console.log('There was a problem. Status Code: ' + response.status);
+                        console.log('Request Error. Status Code: ' + response.status);
                         return;
                         }
-                    let data = response.json()
+                    return response.json();
+                })
+                .catch(err => console.log('Network Error: ', err));
+            }
+            const result = sendUpdate('insert.php');
+            result.then(data => {
+                let data = response.json()
                     console.log("Data Received: ", data);
                     if (data.error==true) {
                         list.errorMessage = data.message;
                         console.log("errorMessage: ", list.errorMessage);
-                    } else { // XHR successful. Output success message below todolist 
+                    } else { // Successful. Output success message below todolist 
                         list.successMessage = data.message;
                     }
-                })
-                .catch(err => console.log('Request Error: ', err));
-            }
-            sendUpdate('insert.php');
+            });
         },
 
         toFormData: function(obj){

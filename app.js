@@ -45,13 +45,9 @@ var app = new Vue({
 			async function sendLogin(url = '', data = logForm) {
 				await fetch(url, {
 				  method: 'POST', // *GET, POST, PUT, DELETE, etc.
-				  headers: {
-					'Content-Type': 'multipart/form-data'
-				  },
 				  body: data // body data type must match "Content-Type" header
 				})
 				.then(response => {
-					let data = response.json();
 					if (!response.ok) {
 					console.log('There was a problem. Status Code: ' + response.status);
 					return;
@@ -59,23 +55,25 @@ var app = new Vue({
 			
 					// Examine the text in the response
 					console.log('response data: ', data);
-			
-					if(data.error==true){ // xhr failed, set the errorMessage
-						app.errorMessage = data.message;
-					} else { // xhr successful. clear input areas, set successMessage, navigate to success.php 
-						app.successMessage = data.message;
-						app.logDetails = { username: '', password: '' };
-						// Wait 3 seconds while displaying error/success message, then open success.php
-						setTimeout(function() {
-							window.location.href = "list.php";
-							}, 3000);
-					}
-					})
+					return response.json();
+				})
 				.catch(function(err) {
 					console.log('Fetch Error : ', err);
 				});
 			}
-			sendLogin('login.php');
+			const response = sendLogin('login.php');
+			response.then(data => {
+				if(data.error==true){ // failed, set the errorMessage
+					app.errorMessage = data.message;
+				} else { // successful. clear input areas, set successMessage, navigate to success.php 
+					app.successMessage = data.message;
+					app.logDetails = { username: '', password: '' };
+					// Wait 3 seconds while displaying error/success message, then open success.php
+					setTimeout(function() {
+						window.location.href = "list.php";
+						}, 3000);
+				}
+			});
 			// end Fetch
 		},
  
