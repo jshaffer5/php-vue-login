@@ -50,27 +50,26 @@ var app = new Vue({
 				  },
 				  body: JSON.stringify(data) // body data type must match "Content-Type" header
 				})
-				.then(response => JSON.parse(response.body))
-				.then(
-					function(data) {
-						if (response.ok) {
-						console.log('There was a problem. Status Code: ' + response.status);
-						return;
-						}
-				
-						// Examine the text in the response
-						console.log('response data: ', data);
-				
-						if(data.error==true){ // xhr failed, set the errorMessage
-							app.errorMessage = data.message;
-						} else { // xhr successful. clear input areas, set successMessage, navigate to success.php 
-							app.successMessage = data.message;
-							app.logDetails = { username: '', password: '' };
-							// Wait 3 seconds while displaying error/success message, then open success.php
-							setTimeout(function() {
-								window.location.href = "list.php";
-								}, 3000);
-						}
+				.then(response => {
+					let data = response.json();
+					if (!response.ok) {
+					console.log('There was a problem. Status Code: ' + response.status);
+					return;
+					}
+			
+					// Examine the text in the response
+					console.log('response data: ', data);
+			
+					if(data.error==true){ // xhr failed, set the errorMessage
+						app.errorMessage = data.message;
+					} else { // xhr successful. clear input areas, set successMessage, navigate to success.php 
+						app.successMessage = data.message;
+						app.logDetails = { username: '', password: '' };
+						// Wait 3 seconds while displaying error/success message, then open success.php
+						setTimeout(function() {
+							window.location.href = "list.php";
+							}, 3000);
+					}
 					})
 				.catch(function(err) {
 					console.log('Fetch Error : ', err);
