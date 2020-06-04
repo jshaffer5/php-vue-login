@@ -1,9 +1,16 @@
 <?php
 session_start();
 
-/* mysqli([host], [username], [password], [db name], [port], [socket]) */
-$conn = new mysqli("localhost", "root", "root", "vue_login");
- 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+$conn = new mysqli($server, $username, $password, $db);
+
+if (empty($url["host"])){
+$conn = new mysqli("localhost", "root", "root", "vue_todolist");
+}
 if ($conn->connect_error) {
 	$out["error"]=true;
     $out["message"]="Connection failed: $conn->connect_error";

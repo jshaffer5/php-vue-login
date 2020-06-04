@@ -73,10 +73,7 @@ var app = new Vue({
 					console.log('Fetch Error : ', err);
 				});
 			}
-			const response = sendLogin('login.php');
-			response.then(data => {
-				
-			});
+			sendLogin('login.php');
 			// end Fetch
 		},
  

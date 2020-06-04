@@ -36,7 +36,7 @@ if ($action=="delete") {
 }
 
 $query = $conn->query($sql);
-
+$conn->close();
 
 
 header("Content-type: application/json");
