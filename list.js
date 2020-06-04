@@ -117,6 +117,7 @@ var list = new Vue({
                 })
                 .catch(err => console.log('Network Error: ', err));
             }
+            sendUpdate('insert.php');
             // const result = sendUpdate('insert.php');
             // result.then(data => {
             //         console.log("Data Received: ", data);
