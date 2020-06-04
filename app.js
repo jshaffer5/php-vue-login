@@ -40,8 +40,6 @@ var app = new Vue({
 
 			// Fetch
 			const logForm = app.toFormData(app.logDetails);
-
-			// Example POST method implementation:
 			async function sendLogin(url = '', data = logForm) {
 				await fetch(url, {
 				  method: 'POST', // *GET, POST, PUT, DELETE, etc.
