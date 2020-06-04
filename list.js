@@ -97,6 +97,9 @@ var list = new Vue({
             async function sendUpdate(url = '', data = formData) {
                 await fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                  },
                 body: data// body data type must match "Content-Type" header
                 })
                 .then(response => {
