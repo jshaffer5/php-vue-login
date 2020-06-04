@@ -57,22 +57,25 @@ var app = new Vue({
 					console.log('response data: ', data);
 					return response.json();
 				})
+				.then(data => {
+					if(data.error==true){ // failed, set the errorMessage
+						app.errorMessage = data.message;
+					} else { // successful. clear input areas, set successMessage, navigate to success.php 
+						app.successMessage = data.message;
+						app.logDetails = { username: '', password: '' };
+						// Wait 3 seconds while displaying error/success message, then open success.php
+						setTimeout(
+							() => window.location.href = "list.php",
+							3000);
+					}
+				})
 				.catch(function(err) {
 					console.log('Fetch Error : ', err);
 				});
 			}
 			const response = sendLogin('login.php');
 			response.then(data => {
-				if(data.error==true){ // failed, set the errorMessage
-					app.errorMessage = data.message;
-				} else { // successful. clear input areas, set successMessage, navigate to success.php 
-					app.successMessage = data.message;
-					app.logDetails = { username: '', password: '' };
-					// Wait 3 seconds while displaying error/success message, then open success.php
-					setTimeout(function() {
-						window.location.href = "list.php";
-						}, 3000);
-				}
+				
 			});
 			// end Fetch
 		},

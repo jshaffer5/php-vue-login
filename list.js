@@ -107,7 +107,6 @@ var list = new Vue({
                     return response.json();
                 })
                 .then( data => {
-                    console.log("Data Received: ", data);
                     if (data.error==true) {
                         list.errorMessage = data.message;
                         console.log("errorMessage: ", list.errorMessage);
