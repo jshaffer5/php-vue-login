@@ -94,13 +94,13 @@ var list = new Vue({
             // Create FormData object
             var formData = list.toFormData(todo);
             // Create http request
-            async function sendUpdate(url = '', data = todo) {
+            async function sendUpdate(url = '', data = formData) {
                 await fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'multipart/form-data'
                 },
-                body: JSON.stringify(todo)// body data type must match "Content-Type" header
+                body: data// body data type must match "Content-Type" header
                 })
                 .then(response => {
                     if (!response.ok) {

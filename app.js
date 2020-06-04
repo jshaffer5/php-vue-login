@@ -42,13 +42,13 @@ var app = new Vue({
 			const logForm = app.toFormData(app.logDetails);
 
 			// Example POST method implementation:
-			async function sendLogin(url = '', data = {}) {
+			async function sendLogin(url = '', data = logForm) {
 				await fetch(url, {
 				  method: 'POST', // *GET, POST, PUT, DELETE, etc.
 				  headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'multipart/form-data'
 				  },
-				  body: JSON.stringify(app.logDetails) // body data type must match "Content-Type" header
+				  body: data // body data type must match "Content-Type" header
 				})
 				.then(response => {
 					let data = response.json();
