@@ -31,6 +31,8 @@ if ($action=="delete") {
 
 $query = $conn->query($sql);
 
+$out['message'] = "Item $todo_text was added";
+
 header("Content-type: application/json");
 echo json_encode($out);
 die();
