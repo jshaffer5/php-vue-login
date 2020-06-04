@@ -94,13 +94,13 @@ var list = new Vue({
             // Create FormData object
             var formData = list.toFormData(todo);
             // Create http request
-            async function sendUpdate(url = '', data = {}) {
+            async function sendUpdate(url = '', data = todo) {
                 await fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // body data type must match "Content-Type" header
+                body: JSON.stringify(todo)// body data type must match "Content-Type" header
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -118,7 +118,7 @@ var list = new Vue({
                 })
                 .catch(err => console.log('Request Error: ', err));
             }
-            sendUpdate('insert.php', formData);
+            sendUpdate('insert.php');
         },
 
         toFormData: function(obj){

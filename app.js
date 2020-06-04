@@ -48,7 +48,7 @@ var app = new Vue({
 				  headers: {
 					'Content-Type': 'application/json'
 				  },
-				  body: JSON.stringify(data) // body data type must match "Content-Type" header
+				  body: JSON.stringify(app.logDetails) // body data type must match "Content-Type" header
 				})
 				.then(response => {
 					let data = response.json();
@@ -75,7 +75,7 @@ var app = new Vue({
 					console.log('Fetch Error : ', err);
 				});
 			}
-			sendLogin('login.php', logForm);
+			sendLogin('login.php');
 			// end Fetch
 		},
  
