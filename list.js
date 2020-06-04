@@ -110,7 +110,6 @@ var list = new Vue({
             }
             const result = sendUpdate('insert.php');
             result.then(data => {
-                let data = response.json()
                     console.log("Data Received: ", data);
                     if (data.error==true) {
                         list.errorMessage = data.message;
