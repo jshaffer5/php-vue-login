@@ -5,7 +5,10 @@ session_start();
 $conn = new mysqli("localhost", "root", "root", "vue_login");
  
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+	$out["error"]=true;
+    $out["message"]="Connection failed: $conn->connect_error";
+    echo json_encode($out);
+    die();
 }
  
 $out = array('error' => false);

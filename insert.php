@@ -13,7 +13,10 @@ $conn = new mysqli("localhost", "root", "root", "vue_todolist");
 }
 
 if ($conn->connect_error) {
-    die( "insert.php: 16 -> Connection failed: " . $conn->connect_error . "url empty?: " . empty($url["host"]));
+    $out["error"]=true;
+    $out["message"]="Connection failed: $conn->connect_error";
+    echo json_encode($out);
+    die();
 }
 
 $out = array('error' => false);
@@ -24,15 +27,17 @@ $sql = "";
 
 $out["action"]=$action;
 if ($action=="delete") {
+    $out['message'] = "Item $todo_text was removed";
     $sql = "DELETE FROM todos WHERE todoText='$todo_text'";
 } else {
     $out["action"]="insert";
+    $out['message'] = "Item $todo_text was added";
     $sql = "INSERT INTO todos (todoText) VALUES ('$todo_text')";
 }
 
 $query = $conn->query($sql);
 
-$out['message'] = "Item $todo_text was added";
+
 
 header("Content-type: application/json");
 echo json_encode($out);
