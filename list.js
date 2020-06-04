@@ -68,26 +68,55 @@ var list = new Vue({
         },
 
         updateItemRequest: function(item, action) {
+            // let todo = { todoText: item, action: action};
+            // // Create FormData object
+            // var formData = list.toFormData(todo);
+            // // Create http request
+            // var xhr = new XMLHttpRequest();
+            // xhr.onreadystatechange = function() {
+            //     if (this.readyState==4 && this.status==200){
+            //         console.log("response text: ", this.responseText);
+            //         let responseJSON = JSON.parse(this.responseText);
+            //         console.log("responseJSON: ", responseJSON);
+            //         if (responseJSON.error==true) {
+            //             list.errorMessage = responseJSON.message;
+            //             console.log("errorMessage: ", list.errorMessage);
+            //         } else { // XHR successful. Output success message below todolist 
+            //             list.successMessage = responseJSON.message;
+            //         }
+            //     }
+            // };
+            // xhr.open("POST", "insert.php", true);
+            // xhr.send(formData);
+
+            // fetch
             let todo = { todoText: item, action: action};
             // Create FormData object
             var formData = list.toFormData(todo);
             // Create http request
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState==4 && this.status==200){
-                    console.log("response text: ", this.responseText);
-                    let responseJSON = JSON.parse(this.responseText);
-                    console.log("responseJSON: ", responseJSON);
-                    if (responseJSON.error==true) {
-                        list.errorMessage = responseJSON.message;
-                        console.log("errorMessage: ", list.errorMessage);
-                    } else { // XHR successful. Output success message below todolist 
-                        list.successMessage = responseJSON.message;
+            async function sendUpdate(url = '', data = {}) {
+                await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+                })
+                .then(response => JSON.parse(response))
+                .then(data => {
+                    if (response.ok){
+                        console.log("Data Received: ", data);
+                        if (data.error==true) {
+                            list.errorMessage = data.message;
+                            console.log("errorMessage: ", list.errorMessage);
+                        } else { // XHR successful. Output success message below todolist 
+                            list.successMessage = data.message;
+                        }
                     }
-                }
-            };
-            xhr.open("POST", "insert.php", true);
-            xhr.send(formData);
+                })
+                .catch(err => console.log('Request Error: ', err));
+            }
+            sendUpdate('insert.php', formData);
         },
 
         toFormData: function(obj){
