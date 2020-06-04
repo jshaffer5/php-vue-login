@@ -126,18 +126,18 @@ var list = new Vue({
             //             list.successMessage = data.message;
             //         }
             // });
-            (async () => {
-                const response = await sendUpdate('insert.php');
-                response.then(data => {
-                    console.log("Data Received: ", data);
-                if (data.error==true) {
-                    list.errorMessage = data.message;
-                    console.log("errorMessage: ", list.errorMessage);
-                } else { // Successful. Output success message below todolist 
-                    list.successMessage = data.message;
-                }
-            })
-            })()
+            // (async () => {
+            //     const response = await sendUpdate('insert.php');
+            //     response.then(data => {
+            //         console.log("Data Received: ", data);
+            //     if (data.error==true) {
+            //         list.errorMessage = data.message;
+            //         console.log("errorMessage: ", list.errorMessage);
+            //     } else { // Successful. Output success message below todolist 
+            //         list.successMessage = data.message;
+            //     }
+            // })
+            // })()
         },
 
         toFormData: function(obj){
