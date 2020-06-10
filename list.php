@@ -27,7 +27,7 @@ session_start();
             <button id="add" class="btn btn-success" @click="addItem">
                 Add
             </button><hr>
-            <ul id="list-items"> 
+            <ul id="list-items" v-cloak> 
                 <li class="ui-state-default" v-for="todo in todos">
                 <div class="checkbox">
                                 <input type="checkbox" class="list-checkbox" 
@@ -37,7 +37,7 @@ session_start();
                             </div>
                 </li>
             </ul>
-            <span>Completed Tasks: <a v-for="item in checkedItems" @click="recoverItem">{{ item }}, </a></span>
+            <span v-cloak>Completed Tasks: <a v-for="item in checkedItems" @click="recoverItem">{{ item }}, </a></span>
             <div class="todo-footer">
                 <strong><span class="count-todos"></span></strong> {{ itemsLeft }} Items Left
             </div>
