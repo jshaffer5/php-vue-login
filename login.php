@@ -43,7 +43,7 @@ else{
 	}
 	else{
 		$out['error'] = true;
-		$out['message'] = "Login Failed. User not Found";
+		$out['message'] = "Login Failed. Incorrect username or password";
 	}
 }
  
