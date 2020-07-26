@@ -29,12 +29,12 @@ session_start();
 			  	</div>
 			</div>
  
-			<div class="alert alert-danger text-center" v-if="errorMessage">
+			<div class="alert alert-danger text-center" v-if="errorMessage" v-cloak>
 				<button type="button" class="close" @click="clearMessage();"><span aria-hidden="true">&times;</span></button>
 				<span class="glyphicon glyphicon-alert"></span> {{ errorMessage }}
 			</div>
  
-			<div class="alert alert-success text-center" v-if="successMessage">
+			<div class="alert alert-success text-center" v-if="successMessage" v-cloak>
 				<button type="button" class="close" @click="clearMessage();"><span aria-hidden="true">&times;</span></button>
 				<span class="glyphicon glyphicon-check"></span> {{ successMessage }}
 			</div>

@@ -19,7 +19,7 @@ session_start();
 	<h1 class="page-header">Josh's Vue.js Todo List</h1>
     
     <div id="list-flex">
-        <div id="list" class="todo-list">
+        <div id="list" class="todo-list" v-cloak>
             <h2>
                 Todos
             </h2>
